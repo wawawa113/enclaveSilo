@@ -201,7 +201,6 @@ void worker_th(int thid, int gid) {
 
     SiloResult[thid].local_commit_counts_ = ret.local_commit_counts_ ;
     SiloResult[thid].local_abort_counts_ = ret.local_abort_counts_;
-    // std::cout << "worker_end" << std::endl;
 }
 
 void logger_th(int thid) {
@@ -350,8 +349,9 @@ int SGX_CDECL main() {
     }
 
     p2 = chrono::system_clock::now();
-
+    cout<<"start init"<<endl;
     ecall_initDB(global_eid);
+    cout<<"end init"<<endl;
     LoggerAffinity affin;
     affin.init(THREAD_NUM, LOGGER_NUM); // logger/worker実行threadの決定
 

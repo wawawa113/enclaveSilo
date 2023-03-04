@@ -79,6 +79,7 @@ void ecall_initDB() {
         tmp->tidword_.lock = 0;
         tmp->key_ = i;
         tmp->val_ = 0;
+        Table.put(i,tmp,0);
     }
 
     for (int i = 0; i < THREAD_NUM; i++) {
