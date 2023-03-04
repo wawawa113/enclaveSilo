@@ -31,7 +31,7 @@ void TxExecutor::read(uint64_t key) {
     TIDword expected, check;
     if (searchReadSet(key) || searchWriteSet(key)) goto FINISH_READ;
     Tuple *tuple;
-    tuple = &Table[key];
+    tuple = Table.get(key);
     expected.obj_ = loadAcquire(tuple->tidword_.obj_);
     
     for (;;) {
@@ -67,7 +67,7 @@ void TxExecutor::write(uint64_t key, uint64_t val) {
     if (re) {   //HACK: 仕様がわかってないよ(田中先生も)
         tuple = re->rcdptr_;
     } else {
-        tuple = &Table[key];
+        tuple = Table.get(key);
     }
     write_set_.emplace_back(key, tuple, val);
 

@@ -6,8 +6,9 @@
 #include "tuple.h"
 
 #include "../../Include/consts.h"
+#include "../OCH.cpp"
 
-extern std::vector<Tuple> Table;
+extern OptCuckoo<Tuple*> Table;
 extern std::vector<uint64_t> ThLocalEpoch;
 extern std::vector<uint64_t> CTIDW;
 extern std::vector<uint64_t> ThLocalDurableEpoch;

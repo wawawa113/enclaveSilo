@@ -54,8 +54,9 @@
 
 #include "include/debug.h"
 
+#include "OCH.cpp"
 
-std::vector<Tuple> Table(TUPLE_NUM);
+OptCuckoo<Tuple*> Table(TUPLE_NUM*2);
 std::vector<uint64_t> ThLocalEpoch(THREAD_NUM);
 std::vector<uint64_t> CTIDW(THREAD_NUM);
 std::vector<uint64_t> ThLocalDurableEpoch(LOGGER_NUM);
@@ -72,8 +73,7 @@ bool quit = false;
 void ecall_initDB() {
     // init Table
     for (int i = 0; i < TUPLE_NUM; i++) {
-        Tuple *tmp;
-        tmp = &Table[i];
+        Tuple *tmp=new Tuple();
         tmp->tidword_.epoch = 1;
         tmp->tidword_.latest = 1;
         tmp->tidword_.lock = 0;
